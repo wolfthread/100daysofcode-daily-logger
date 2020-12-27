@@ -1,0 +1,46 @@
+.blockquote {
+  margin: 10px;
+  width: 45%;
+}
+
+.link-inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.timerContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.timerBox {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.timerButtons {
+  width: 40%;
+  margin: 20px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.modal-header,
+.modal-footer,
+.modal-body {
+  background-color: #43505d;
+}
+
+#timer {
+  margin: 10px;
+  text-align: center;
+  display: flex;
+  align-self: center;
+  font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
+  font-size: 25px;
+  background-color: #5cb85c;
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="My Daily Logger" />
+        <meta
+          property="og:description"
+          content="Daily Log Formatter for the 100 Days of Code"
+        />
+        <meta
+          property="og:image"
+          content="https://sylvaindessureault.com/100-days-of-code-daily-logger/img/100-days-of-code-daily-logger.png"
+        />
+        <meta property="og:url" content="https://sylvaindessureault.com/100-days-of-code-daily-logger/" />
+        <title>My Daily Logger</title>
+
+        <!-- Bootstrap superhero theme by Bootswatch-->
+        <link
+            href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/superhero/bootstrap.min.css"
+            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+            crossorigin="anonymous" />
+        <link href="./styles/styles.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="jumbotron">
+            <div>
+                <a href="https://github.com/wolfthread/100-days-of-code-daily-logger"
+                    style="text-decoration: none;">
+                    <i class="fab fa-github fa-2x"></i>
+                    <h5 class="mb-5">See on Github</h5>
+                </a>
+            </div>
+
+            <h1 class="display-3">My Daily Logger</h1>
+            <p class="lead">My simple daily log formatter for the <span
+                    id="challengeName">#100DaysOfCode</span> challenge.</p>
+            <hr class="my-4">
+            <p>To learn more about the official #100DaysOfCode:</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" target="_black"
+                    href="https://www.100daysofcode.com/"
+                    role="button">#100DaysOfCode</a>
+            </p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <blockquote class="blockquote">
+                <p class="mb-0">Perseverance... keeps honor bright: to have
+                    done, is to hang quite out of fashion, like a rusty nail in
+                    monumental mockery.</p>
+                <footer class="blockquote-footer">Shakespeare <cite
+                        title="Source Title">Troilus and Cressida</cite>
+                </footer>
+            </blockquote>
+            <div class="timerContainer">
+                <div class="timerBox">
+                    <h3>Monitor your coding time</h3>
+                    <div class="timerButtons">
+                        <button type="button" class="btn btn-success"
+                            onclick=startTimer()><img
+                                src="img/timer-24px.svg"></button>
+                        <button type="button" class="btn btn-danger"
+                            onclick=stopTimer()><img
+                                src="img/timer_off-24px.svg"></button>
+                        <button type="button" class="btn btn-warning"
+                            onclick=resetTimer()>Reset</button>
+                    </div>
+                    <div id="timer"></div>
+                    <h5>Here's your progress for the 1-hour-a-day goal:</h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                            role="progressbar" id="progressMarker"
+                            aria-valuenow="0" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="d-xl-flex d-xs-wrap justify-content-center">
+            <!-- Daily input card -->
+            <div class="p-2 flex-fill bd-highlight">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Daily Logger</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Enter Info</h4>
+                        <div class="form-group">
+                            <label class="col-form-label">Day #:</label>
+                            <input type="number" min="0" class="form-control"
+                                id="inputDay">
+                            <label class="col-form-label">Thoughts:</label>
+                            <textarea class="form-control" id="inputThoughts"
+                                maxlength="280"></textarea>
+                            <br>
+                            <div>
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="addAccomplishmentInput()">Add
+                                    Accomplishment</button>
+                                <button type="button" class="btn btn-danger"
+                                    onclick="removeAccomplishmentInput()">Remove</button>
+                            </div>
+                            <div class="link-inputs" id="accomplishmentInput">
+                            </div>
+                            <br>
+                            <div>
+                                <button type="button"
+                                    class="btn btn-secondary btn-xs"
+                                    onclick="addLinkInput()">Add Link</button>
+                                <button type="button" class="btn btn-danger"
+                                    onclick="removeLinkInput()">Remove</button>
+                            </div>
+                            <div class="link-inputs" id="linkInput"></div>
+                        </div>
+                        <button type="button"
+                            class="btn btn-primary btn-lg mr-2"
+                            onclick="formatLogs()">Let's Format my Log!</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Twitter layout card -->
+            <div class="p-2 flex-fill bd-highlight">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Twitter Format</div>
+                    <div class="card-body" id="twitterLog">
+                        <h4 class="card-title">Day <span id="dayNumTwitter"> X
+                            </span> of #100DaysOfCode</h4>
+                        <p class="card-text" id="twitterBlurb">There will be
+                            some words I want to tweet to the world here
+                            someday!</p>
+                        <div id="twitterProgress"></div>
+                        <div><button type="button"
+                                class="btn btn-outline-primary"
+                                onclick=copyTwitter()>Copy</button></div>
+                    </div>
+                </div>
+            </div>
+            <!--  Github layout card -->
+            <div class="p-2 flex-fill bd-highlight">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Github Log Markdown Format</div>
+                    <div class="card-body" id="githubLog">
+                        <h4 class="card-title">### Day <span id="dayNumGithub">
+                                X </span>: <span id="dateGithub"></span></h4>
+                        <br>
+                        <p class="card-text">**Today's Progress**</p>
+                        <div id="accomplishmentsLog"></div>
+                        <p class="card-text">**Thoughts**</p>
+                        <p class="card-text" id="thoughts"></p>
+                        <p class="card-text">**Link(s) to work**</p>
+                        <div id="linksLog"></div>
+                        <p class="card-text">-----</p>
+                        <div><button type="button"
+                                class="btn btn-outline-primary"
+                                onclick=copyGithub()>Copy</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Generic Modal -->
+        <div class="modal" id="mainModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close"
+                            onclick=triggerModalClose("mainModal")>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="mainModalText"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal"
+                            onclick=triggerModalClose("mainModal")>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Challenge Success Modal-->
+        <div class="modal" id="challengeSuccessModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">BRAVO!!!</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close"
+                            onclick=triggerModalClose("challengeSuccessModal")>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="challengeSucessText"></p>
+                        <button class="btn btn-primary"
+                            onclick=triggerModalClose("challengeSuccessModal")>Keep
+                            on Coding!</button>
+                        <button class="btn btn-danger"
+                            onclick=stopTimer(),triggerModalClose("challengeSuccessModal")>Stop
+                            the timer</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal"
+                            onclick=triggerModalClose("challengeSuccessModal")>Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="./scripts/logger.js"></script>
+
+    </body>
+    <footer class="d-flex justify-content-center">
+        <p>
+            Made with love by <a
+                href="https://sylvaindessureault.com">Sylvain
+                Dessureault</a> using the Superhero bootswatch theme by Thomas
+            Park
+        </p>
+
+    </footer>
+
+</html>
